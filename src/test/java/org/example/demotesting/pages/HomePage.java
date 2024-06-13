@@ -18,56 +18,28 @@ public class HomePage {
     @FindBy(xpath = "//a[@href='/Customers']")
     private WebElement customers;
 
-    @FindBy(xpath = "//a[@href='/Customers/add-customer']")
-    private WebElement addCustomerButton;
+    @FindBy(xpath = "//a[@href='/Purchases']")
+    private WebElement purchases;
 
-    @FindBy(id = "fname")
-    private WebElement fnameField;
-
-    @FindBy(id = "lname")
-    private WebElement lnameField;
-
-    @FindBy(id = "email")
-    private WebElement emailField;
-
-    @FindBy(id = "phoneNumber")
-    private WebElement phoneNumberField;
-
-    @FindBy(className = "react-datepicker__input-container")
-    private WebElement datePickerField;
-
-    @FindBy(className = "year-picker")
-    private WebElement yearPickerField;
-
-    @FindBy(className = "month-picker")
-    private WebElement monthPickerField;
-
-    @FindBy(xpath = "//a[@type='submit']")
-    private WebElement submitCustomer;
-
-    public void AddCustomer(String fname, String lname, String email, String phoneNumber,
-                            String customerBirthDay, String customerBirthMonth, String customerBirthYear)  {
+    public void GoToCustomers()  {
 
         // click the Customers field from the navigation bar
         customers.click();
+        CustomersPage customersPage = new CustomersPage(driver);
 
-        // click the add customer button
-        addCustomerButton.click();
+        // Add a new customer
+        customersPage.addNewCustomer();
 
-        // fill the fields for customer's addition
-        fnameField.sendKeys(fname);
-        lnameField.sendKeys(lname);
-        emailField.sendKeys(email);
-        phoneNumberField.sendKeys(phoneNumber);
-        datePickerField.click();
-        yearPickerField.click();
-        yearPickerField.sendKeys(customerBirthYear);
-        monthPickerField.sendKeys(customerBirthMonth);
-        String dayXPath = String.format("(//*[text()='%s'])[2]", customerBirthDay);
-        WebElement dayOption = driver.findElement(By.xpath(dayXPath));
-        dayOption.click();
+    }
 
-        // click the submit button
-        submitCustomer.click();
+    public void GoToPurchases()  {
+
+        // click the Purchases field from the navigation bar
+        purchases.click();
+        PurchasesPage purchasesPage = new PurchasesPage(driver);
+
+        // Add a new purchase
+        purchasesPage.addNewPurchase();
+
     }
 }

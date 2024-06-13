@@ -13,17 +13,10 @@ public class SimpleTest {
     static WebDriver driver;
     static String username = "admin";
     static String password = "12345678";
-    static String fname = "Petros";
-    static String lname = "Tsatsis";
-    static String email = "test10@test.test";
-    static String phoneNumber = "1234567886";
-    static String birthDay = "30";
-    static String birthMonth = "May";
-    static String birthYear = "2002";
 
 
-    @Test
-    public void AddCustomerTest() {
+    @Test(testName = "AddCustomer")
+    public void AddCustomer() {
 
         WebDriver driver = initializeDriver();
         driver.manage().window().maximize();
@@ -35,8 +28,23 @@ public class SimpleTest {
 
         // add a new customer
         HomePage homePage = new HomePage(driver);
-        homePage.AddCustomer(fname, lname, email, phoneNumber, birthDay, birthMonth, birthYear);
+        homePage.GoToCustomers();
 
+    }
+
+    @Test(testName = "AddPurchase")
+    public void AddPurchase(){
+        WebDriver driver = initializeDriver();
+        driver.manage().window().maximize();
+
+        // land in the page and sign in
+        LandingPage landingPage = new LandingPage(driver);
+        landingPage.goTo();
+        landingPage.SignIn(username, password);
+
+        // add a new customer
+        HomePage homePage = new HomePage(driver);
+        homePage.GoToPurchases();
     }
 
     public static WebDriver initializeDriver()
