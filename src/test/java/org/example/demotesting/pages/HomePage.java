@@ -53,13 +53,12 @@ public class HomePage {
 
     }
 
-    public void goToProfile(){
-
+    public void goToProfile() {
         offCanvasToggler.click();
 
-        // Create an explicit wait to wait for the profile to be visible
+        // Create an explicit wait to wait for the profile to be clickable
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        wait.until(ExpectedConditions.visibilityOf(profile));
+        wait.until(ExpectedConditions.elementToBeClickable(profile));
 
         profile.click();
 

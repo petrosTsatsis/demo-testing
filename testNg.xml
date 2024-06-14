@@ -2,6 +2,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Demo Crm Suite">
 
+    <listeners>
+        <listener class-name="org.example.demotesting.simpleTest.Listeners"></listener>
+
+    </listeners>
     <test name="AddCustomer">
         <classes>
             <class name="org.example.demotesting.simpleTest.SimpleTest">
