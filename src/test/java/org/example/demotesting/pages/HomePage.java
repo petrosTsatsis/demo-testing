@@ -5,6 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class HomePage {
 
@@ -21,7 +25,13 @@ public class HomePage {
     @FindBy(xpath = "//a[@href='/Purchases']")
     private WebElement purchases;
 
-    public void GoToCustomers()  {
+    @FindBy(xpath = "//button[@aria-label='Toggle navigation']")
+    private WebElement offCanvasToggler;
+
+    @FindBy(xpath = "//a[@href='/Profile']")
+    private WebElement profile;
+
+    public void goToCustomers()  {
 
         // click the Customers field from the navigation bar
         customers.click();
@@ -32,7 +42,7 @@ public class HomePage {
 
     }
 
-    public void GoToPurchases()  {
+    public void goToPurchases()  {
 
         // click the Purchases field from the navigation bar
         purchases.click();
@@ -41,5 +51,19 @@ public class HomePage {
         // Add a new purchase
         purchasesPage.addNewPurchase();
 
+    }
+
+    public void goToProfile(){
+
+        offCanvasToggler.click();
+
+        // Create an explicit wait to wait for the profile to be visible
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOf(profile));
+
+        profile.click();
+
+        ProfilePage profilePage = new ProfilePage(driver);
+        profilePage.editProfile();
     }
 }

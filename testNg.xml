@@ -4,8 +4,31 @@
 
     <test name="AddCustomer">
         <classes>
-            <class name="org.example.demotesting.simpleTest.SimpleTest"/>
+            <class name="org.example.demotesting.simpleTest.SimpleTest">
+                <methods>
+                    <include name="AddCustomer"/>
+                </methods>
+            </class>
         </classes>
     </test>
 
+    <test name="AddPurchase">
+        <classes>
+            <class name="org.example.demotesting.simpleTest.SimpleTest">
+                <methods>
+                    <include name="AddPurchase"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="EditProfile">
+        <classes>
+            <class name="org.example.demotesting.simpleTest.SimpleTest">
+                <methods>
+                    <include name="EditProfile"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

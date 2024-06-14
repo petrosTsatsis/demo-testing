@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CustomersPage {
 
@@ -16,12 +17,12 @@ public class CustomersPage {
     }
 
     String fname = "Petros";
-    static String lname = "Tsatsis";
-    static String email = "test@test.test";
-    static String phoneNumber = "1234567888";
-    static String birthDay = "30";
-    static String birthMonth = "May";
-    static String birthYear = "2002";
+    String lname = "Tsatsis";
+    String email = "test@test.test";
+    String phoneNumber = "1234567888";
+    String birthDay = "30";
+    String birthMonth = "May";
+    String birthYear = "2002";
 
     @FindBy(xpath = "//a[@href='/Customers/add-customer']")
     private WebElement addCustomerButton;
@@ -56,12 +57,7 @@ public class CustomersPage {
     @FindBy(xpath = "//div[@class='popover-content']//button[1]")
     private WebElement customerDetailsButton;
 
-    public void addNewCustomer(){
-        CustomerFields(fname, lname, email, phoneNumber, birthDay, birthMonth, birthYear);
-    }
-
-    public void CustomerFields(String fname, String lname, String email, String phoneNumber,
-                            String customerBirthDay, String customerBirthMonth, String customerBirthYear)  {
+    public void addNewCustomer()  {
 
         // click the add customer button
         addCustomerButton.click();
@@ -73,17 +69,16 @@ public class CustomersPage {
         phoneNumberField.sendKeys(phoneNumber);
         datePickerField.click();
         yearPickerField.click();
-        yearPickerField.sendKeys(customerBirthYear);
-        monthPickerField.sendKeys(customerBirthMonth);
-        String dayXPath = String.format("(//*[text()='%s'])[2]", customerBirthDay);
+        yearPickerField.sendKeys(birthYear);
+        monthPickerField.sendKeys(birthMonth);
+        String dayXPath = String.format("(//*[text()='%s'])[2]", birthDay);
         WebElement dayOption = driver.findElement(By.xpath(dayXPath));
         dayOption.click();
 
         // click the submit button
         submitCustomer.click();
 
-        boolean isClickable = isElementClickable(carouselTableButton);
-        viewNewCustomer(isClickable);
+        viewNewCustomer(isElementClickable(carouselTableButton));
 
     }
 
@@ -101,6 +96,12 @@ public class CustomersPage {
         // Click the checkbox
         checkbox.click();
         customerDetailsButton.click();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        driver.quit();
     }
 
     public boolean isElementClickable(WebElement element) {

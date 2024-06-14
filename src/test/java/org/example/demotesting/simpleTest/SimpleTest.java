@@ -26,9 +26,8 @@ public class SimpleTest {
         landingPage.goTo();
         landingPage.SignIn(username, password);
 
-        // add a new customer
         HomePage homePage = new HomePage(driver);
-        homePage.GoToCustomers();
+        homePage.goToCustomers();
 
     }
 
@@ -42,9 +41,22 @@ public class SimpleTest {
         landingPage.goTo();
         landingPage.SignIn(username, password);
 
-        // add a new customer
         HomePage homePage = new HomePage(driver);
-        homePage.GoToPurchases();
+        homePage.goToPurchases();
+    }
+
+    @Test(testName = "EditProfile")
+    public void EditProfile(){
+        WebDriver driver = initializeDriver();
+        driver.manage().window().maximize();
+
+        // land in the page and sign in
+        LandingPage landingPage = new LandingPage(driver);
+        landingPage.goTo();
+        landingPage.SignIn(username, password);
+
+        HomePage homePage = new HomePage(driver);
+        homePage.goToProfile();
     }
 
     public static WebDriver initializeDriver()

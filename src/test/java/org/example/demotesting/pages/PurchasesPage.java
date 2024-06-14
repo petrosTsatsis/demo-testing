@@ -50,6 +50,15 @@ public class PurchasesPage {
     @FindBy(xpath = "//a[@type='submit']")
     private WebElement submitPurchase;
 
+    @FindBy(xpath = "(//button[@class='carousel-button'])[2]")
+    private WebElement carouselTableButton;
+
+    @FindBy(xpath = "//div[@class='popover-content']//button[1]")
+    private WebElement purchaseDetailsButton;
+
+    @FindBy(xpath = "//table/tbody/tr[last()]//input[@type='checkbox']")
+    private WebElement newPurchasesCheckbox;
+
     public void addNewPurchase()  {
 
         // click the add purchase button
@@ -81,9 +90,27 @@ public class PurchasesPage {
         // click the submit button
         submitPurchase.click();
 
+        viewNewPurchase(isElementClickable(carouselTableButton));
+
     }
 
+    public void viewNewPurchase(boolean isClickable){
 
+        while (isClickable){
+            carouselTableButton.click();
+            isClickable = isElementClickable(carouselTableButton);
+        }
+
+        // Click the checkbox
+        newPurchasesCheckbox.click();
+        purchaseDetailsButton.click();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        driver.quit();
+    }
 
     public boolean isElementClickable(WebElement element) {
         // Check if the element has the 'disabled' attribute
